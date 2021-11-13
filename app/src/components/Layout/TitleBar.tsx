@@ -12,95 +12,100 @@ import { connectionActions, globalActions, settingsActions } from '../../actions
 import { Theme, withStyles } from '@material-ui/core/styles'
 
 const styles = (theme: Theme) => ({
-  title: {
-    display: 'none' as 'none',
-    [theme.breakpoints.up(750)]: {
-      display: 'block' as 'block',
-    },
-    whiteSpace: 'nowrap' as 'nowrap',
-  },
-  disconnectIcon: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none' as 'none',
-    },
-    marginRight: '8px',
-    paddingLeft: '8px',
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  disconnect: {
-    margin: 'auto 8px auto auto',
-  },
-  disconnectLabel: {
-    color: theme.palette.primary.contrastText,
-  },
+	title: {
+		display: 'none' as 'none',
+		[theme.breakpoints.up(750)]: {
+			display: 'block' as 'block',
+		},
+		whiteSpace: 'nowrap' as 'nowrap',
+	},
+	disconnectIcon: {
+		[theme.breakpoints.down('xs')]: {
+			display: 'none' as 'none',
+		},
+		marginRight: '8px',
+		paddingLeft: '8px',
+	},
+	menuButton: {
+		marginLeft: -12,
+		marginRight: 20,
+	},
+	disconnect: {
+		margin: 'auto 8px auto auto',
+	},
+	disconnectLabel: {
+		color: theme.palette.primary.contrastText,
+	},
 })
 
 interface Props {
-  classes: any
-  actions: {
-    settings: typeof settingsActions
-    connection: typeof connectionActions
-    global: typeof globalActions
-  }
-  topicFilter?: string
+	classes: any
+	actions: {
+		settings: typeof settingsActions
+		connection: typeof connectionActions
+		global: typeof globalActions
+	}
+	topicFilter?: string
 }
 
 class TitleBar extends React.PureComponent<Props, {}> {
-  constructor(props: any) {
-    super(props)
-    this.state = {}
-  }
+	constructor(props: any) {
+		super(props)
+		this.state = {}
+	}
 
-  public render() {
-    const { actions, classes } = this.props
+	public render() {
+		const { actions, classes } = this.props
 
-    return (
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="Menu"
-            onClick={actions.global.toggleSettingsVisibility}
-          >
-            <Menu />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" color="inherit">
-            MQTT Explorer
+		return (
+			<AppBar position="static">
+				<Toolbar>
+					<IconButton
+						className={classes.menuButton}
+						color="inherit"
+						aria-label="Menu"
+						onClick={actions.global.toggleSettingsVisibility}
+					>
+						<Menu />
+					</IconButton>
+					<div style={{ textAlign: "center" }}>
+						<Typography className={classes.title} variant="h6" color="inherit">
+							BaiLi Intelligent Tech
           </Typography>
-          <SearchBar />
-          <PauseButton />
-          <Button
-            className={classes.disconnect}
-            classes={{ label: classes.disconnectLabel }}
-            onClick={actions.connection.disconnect}
-          >
-            Disconnect <CloudOff className={classes.disconnectIcon} />
-          </Button>
-          <ConnectionHealthIndicator withBackground={true} />
-        </Toolbar>
-      </AppBar>
-    )
-  }
+						<Typography style={{ fontSize: "larger" }} className={classes.title} variant="h6" color="inherit">
+							MQTT Utilities
+          </Typography>
+					</div>
+					<SearchBar />
+					<PauseButton />
+					<Button
+						className={classes.disconnect}
+						classes={{ label: classes.disconnectLabel }}
+						onClick={actions.connection.disconnect}
+					>
+						Disconnect <CloudOff className={classes.disconnectIcon} />
+					</Button>
+					<ConnectionHealthIndicator withBackground={true} />
+				</Toolbar>
+			</AppBar >
+		)
+	}
 }
 
 const mapStateToProps = (state: AppState) => {
-  return {
-    topicFilter: state.settings.get('topicFilter'),
-  }
+	return {
+		topicFilter: state.settings.get('topicFilter'),
+	}
 }
 
 const mapDispatchToProps = (dispatch: any) => {
-  return {
-    actions: {
-      settings: bindActionCreators(settingsActions, dispatch),
-      global: bindActionCreators(globalActions, dispatch),
-      connection: bindActionCreators(connectionActions, dispatch),
-    },
-  }
+	return {
+		actions: {
+			settings: bindActionCreators(settingsActions, dispatch),
+			global: bindActionCreators(globalActions, dispatch),
+			connection: bindActionCreators(connectionActions, dispatch),
+		},
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TitleBar))
