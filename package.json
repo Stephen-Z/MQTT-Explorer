@@ -1,122 +1,121 @@
 {
-  "name": "MQTT-Explorer",
-  "version": "0.4.0-beta1",
-  "description": "Explore your message queues",
-  "main": "dist/src/electron.js",
-  "scripts": {
-    "start": "electron .",
-    "test": "yarn test:app && yarn test:backend",
-    "test:app": "cd app && yarn test",
-    "test:backend": "cd backend && yarn test",
-    "install": "cd app && yarn && cd ..",
-    "dev": "npm-run-all --parallel dev:*",
-    "dev:app": "cd app && npm run dev",
-    "dev:electron": "tsc && electron . --development",
-    "lint": "npm-run-all --parallel lint:prettier lint:tslint lint:spellcheck",
-    "lint:prettier": "prettier --check \"**/*.ts{x,}\"",
-    "lint:tslint": "tslint -p ./",
-    "lint:spellcheck": "cspell -e ./build -e \"node_modules\" \"**/*.ts{x,}\"",
-    "build": "tsc && cd app && yarn run build && cd ..",
-    "prepare-release": "ts-node scripts/prepare-release.ts",
-    "package": "ts-node package.ts",
-    "ui-test": "./scripts/uiTests.sh",
-    "upload-video-artifacts": "./scripts/uploadVideoAsset.ts ui-test.mp4 ui-test.gif",
-    "package-with-docker": "./scripts/package-with-docker.sh"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/thomasnordquist/MQTT-Explorer.git"
-  },
-  "build": {
-    "appId": "mqtt-explorer",
-    "productName": "MQTT Explorer",
-    "nodeGypRebuild": false,
-    "mac": {
-      "appId": "de.t7n.apps.mqtt-explorer",
-      "category": "public.app-category.developer-tools",
-      "hardenedRuntime": true,
-      "publish": [
-        "github"
-      ],
-      "entitlements": "res/entitlements.mas.plist"
-    },
-    "linux": {
-      "category": "Development",
-      "maintainer": "Thomas Nordquist"
-    },
-    "snap": {
-      "environment": {
-        "DISABLE_WAYLAND": "1"
-      }
-    },
-    "appx": {
-      "applicationId": "mqttexplorer",
-      "identityName": "51031thomas.nordquist.MQTT-Explorer",
-      "publisherDisplayName": "Thomas Nordquist",
-      "publisher": "CN=0A6DE643-4AA2-4FF2-9729-6935C9ED8C13",
-      "backgroundColor": "transparent",
-      "showNameOnTiles": true
-    },
-    "directories": {
-      "app": "./",
-      "buildResources": "res",
-      "output": "build"
-    },
-    "afterPack": "./dist/scripts/afterPack.js",
-    "afterSign": "./scripts/afterSign.js"
-  },
-  "author": "Thomas Nordquist",
-  "email": "xxnerowingerxx@gmail.com",
-  "homepage": "https://github.com",
-  "license": "CC-BY-ND-4.0",
-  "devDependencies": {
-    "@types/chai": "^4.1.7",
-    "@types/fs-extra": "8",
-    "@types/lowdb": "^1.0.6",
-    "@types/mime": "^2.0.0",
-    "@types/mocha": "^7.0.2",
-    "@types/mustache": "4",
-    "@types/node": "^12.6.8",
-    "@types/semver": "7",
-    "@types/sha1": "^1.1.1",
-    "builder-util-runtime": "^8.2.5",
-    "chai": "^4.2.0",
-    "cspell": "^4.0.28",
-    "electron": "8.2.3",
-    "electron-builder": "22.5.1",
-    "electron-notarize": "^0.3.0",
-    "mocha": "7.1",
-    "mustache": "4",
-    "npm-run-all": "^4.1.5",
-    "nyc": "15",
-    "prettier": "2",
-    "redux-thunk": "^2.3.0",
-    "source-map-support": "^0.5.9",
-    "spectron": "10",
-    "ts-node": "^8.2.0",
-    "tslint": "6",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-react": "^4.0.0",
-    "tslint-react-recommended": "^1.0.15",
-    "tslint-strict-null-checks": "^1.0.1",
-    "typescript": "^3.2.2",
-    "webdriverio": "6"
-  },
-  "dependencies": {
-    "about-window": "^1.12.1",
-    "axios": "^0.19.0",
-    "dot-prop": "^5.0.0",
-    "electron-log": "4.1.1",
-    "electron-telemetry": "git+https://github.com/thomasnordquist/electron-telemetry.git#dist",
-    "electron-updater": "^4.0.6",
-    "fs-extra": "9",
-    "js-base64": "^2.5.1",
-    "json-to-ast": "^2.1.0",
-    "lowdb": "^1.0.0",
-    "mime": "^2.4.4",
-    "mqtt": "^3.0.0",
-    "sha1": "^1.1.1",
-    "yarn-run-all": "^3.1.1"
-  },
-  "optionalDependencies": {}
+	"name": "MQTT-Explorer",
+	"version": "0.4.0-beta1",
+	"description": "Explore your message queues",
+	"main": "dist/src/electron.js",
+	"scripts": {
+		"start": "electron .",
+		"test": "yarn test:app && yarn test:backend",
+		"test:app": "cd app && yarn test",
+		"test:backend": "cd backend && yarn test",
+		"install": "cd app && yarn && cd ..",
+		"dev": "npm-run-all --parallel dev:*",
+		"dev:app": "cd app && npm run dev",
+		"dev:electron": "tsc && electron . --development",
+		"lint": "npm-run-all --parallel lint:prettier lint:tslint lint:spellcheck",
+		"lint:prettier": "prettier --check \"**/*.ts{x,}\"",
+		"lint:tslint": "tslint -p ./",
+		"lint:spellcheck": "cspell -e ./build -e \"node_modules\" \"**/*.ts{x,}\"",
+		"build": "tsc && cd app && yarn run build && cd ..",
+		"prepare-release": "ts-node scripts/prepare-release.ts",
+		"package": "ts-node package.ts",
+		"ui-test": "./scripts/uiTests.sh",
+		"upload-video-artifacts": "./scripts/uploadVideoAsset.ts ui-test.mp4 ui-test.gif",
+		"package-with-docker": "./scripts/package-with-docker.sh"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thomasnordquist/MQTT-Explorer.git"
+	},
+	"build": {
+		"appId": "baili-mqtt-utilities",
+		"productName": "BaiLi MQTT Utilities",
+		"nodeGypRebuild": false,
+		"mac": {
+			"appId": "de.t7n.apps.mqtt-explorer",
+			"category": "public.app-category.developer-tools",
+			"hardenedRuntime": true,
+			"publish": [
+				"github"
+			],
+			"entitlements": "res/entitlements.mas.plist"
+		},
+		"linux": {
+			"category": "Development",
+			"maintainer": "Thomas Nordquist"
+		},
+		"snap": {
+			"environment": {
+				"DISABLE_WAYLAND": "1"
+			}
+		},
+		"appx": {
+			"applicationId": "mqttexplorer",
+			"identityName": "51031thomas.nordquist.MQTT-Explorer",
+			"publisherDisplayName": "Thomas Nordquist",
+			"publisher": "CN=0A6DE643-4AA2-4FF2-9729-6935C9ED8C13",
+			"backgroundColor": "transparent",
+			"showNameOnTiles": true
+		},
+		"directories": {
+			"app": "./",
+			"buildResources": "res",
+			"output": "build"
+		},
+		"afterPack": "./dist/scripts/afterPack.js"
+	},
+	"author": "Thomas Nordquist",
+	"email": "xxnerowingerxx@gmail.com",
+	"homepage": "https://github.com",
+	"license": "CC-BY-ND-4.0",
+	"devDependencies": {
+		"@types/chai": "^4.1.7",
+		"@types/fs-extra": "8",
+		"@types/lowdb": "^1.0.6",
+		"@types/mime": "^2.0.0",
+		"@types/mocha": "^7.0.2",
+		"@types/mustache": "4",
+		"@types/node": "^12.6.8",
+		"@types/semver": "7",
+		"@types/sha1": "^1.1.1",
+		"builder-util-runtime": "^8.2.5",
+		"chai": "^4.2.0",
+		"cspell": "^4.0.28",
+		"electron": "8.2.3",
+		"electron-builder": "22.5.1",
+		"electron-notarize": "^0.3.0",
+		"mocha": "7.1",
+		"mustache": "4",
+		"npm-run-all": "^4.1.5",
+		"nyc": "15",
+		"prettier": "2",
+		"redux-thunk": "^2.3.0",
+		"source-map-support": "^0.5.9",
+		"spectron": "10",
+		"ts-node": "^8.2.0",
+		"tslint": "6",
+		"tslint-config-airbnb": "^5.11.1",
+		"tslint-react": "^4.0.0",
+		"tslint-react-recommended": "^1.0.15",
+		"tslint-strict-null-checks": "^1.0.1",
+		"typescript": "^3.2.2",
+		"webdriverio": "6"
+	},
+	"dependencies": {
+		"about-window": "^1.12.1",
+		"axios": "^0.19.0",
+		"dot-prop": "^5.0.0",
+		"electron-log": "4.1.1",
+		"electron-telemetry": "git+https://github.com/thomasnordquist/electron-telemetry.git#dist",
+		"electron-updater": "^4.0.6",
+		"fs-extra": "9",
+		"js-base64": "^2.5.1",
+		"json-to-ast": "^2.1.0",
+		"lowdb": "^1.0.0",
+		"mime": "^2.4.4",
+		"mqtt": "^3.0.0",
+		"sha1": "^1.1.1",
+		"yarn-run-all": "^3.1.1"
+	},
+	"optionalDependencies": {}
 }
