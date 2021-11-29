@@ -4,7 +4,7 @@
 	"description": "Explore your message queues",
 	"main": "dist/src/electron.js",
 	"scripts": {
-		"start": "electron .",
+		"start": "tsc && electron-forge start",
 		"test": "yarn test:app && yarn test:backend",
 		"test:app": "cd app && yarn test",
 		"test:backend": "cd backend && yarn test",
@@ -18,10 +18,11 @@
 		"lint:spellcheck": "cspell -e ./build -e \"node_modules\" \"**/*.ts{x,}\"",
 		"build": "tsc && cd app && yarn run build && cd ..",
 		"prepare-release": "ts-node scripts/prepare-release.ts",
-		"package": "ts-node package.ts",
+		"package": "electron-forge package",
 		"ui-test": "./scripts/uiTests.sh",
 		"upload-video-artifacts": "./scripts/uploadVideoAsset.ts ui-test.mp4 ui-test.gif",
-		"package-with-docker": "./scripts/package-with-docker.sh"
+		"package-with-docker": "./scripts/package-with-docker.sh",
+		"make": "electron-forge make"
 	},
 	"build": {
 		"appId": "baili-mqtt-utilities",
@@ -63,6 +64,11 @@
 	"author": "Stephen-Z",
 	"license": "MIT",
 	"devDependencies": {
+		"@electron-forge/cli": "^6.0.0-beta.61",
+		"@electron-forge/maker-deb": "^6.0.0-beta.61",
+		"@electron-forge/maker-rpm": "^6.0.0-beta.61",
+		"@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+		"@electron-forge/maker-zip": "^6.0.0-beta.61",
 		"@types/chai": "^4.1.7",
 		"@types/fs-extra": "8",
 		"@types/lowdb": "^1.0.6",
@@ -76,7 +82,6 @@
 		"chai": "^4.2.0",
 		"cspell": "^4.0.28",
 		"electron": "^16.0.1",
-		"electron-builder": "22.5.1",
 		"electron-notarize": "^0.3.0",
 		"mocha": "7.1",
 		"mustache": "4",
@@ -96,10 +101,12 @@
 		"webdriverio": "6"
 	},
 	"dependencies": {
+		"@electron/remote": "^2.0.1",
 		"about-window": "^1.12.1",
 		"axios": "^0.19.0",
 		"dot-prop": "^5.0.0",
 		"electron-log": "4.1.1",
+		"electron-squirrel-startup": "^1.0.0",
 		"electron-telemetry": "git+https://github.com/thomasnordquist/electron-telemetry.git#dist",
 		"electron-updater": "^4.0.6",
 		"fs-extra": "9",
@@ -111,5 +118,32 @@
 		"sha1": "^1.1.1",
 		"yarn-run-all": "^3.1.1"
 	},
-	"optionalDependencies": {}
+	"optionalDependencies": {},
+	"config": {
+		"forge": {
+			"packagerConfig": {},
+			"makers": [
+				{
+					"name": "@electron-forge/maker-squirrel",
+					"config": {
+						"name": "BaiLi_MQTT_Utilities"
+					}
+				},
+				{
+					"name": "@electron-forge/maker-zip",
+					"platforms": [
+						"darwin"
+					]
+				},
+				{
+					"name": "@electron-forge/maker-deb",
+					"config": {}
+				},
+				{
+					"name": "@electron-forge/maker-rpm",
+					"config": {}
+				}
+			]
+		}
+	}
 }

@@ -11,9 +11,9 @@ const applicationMenu: MenuItemConstructorOptions = {
         openAboutWindow({
           icon_path: path.join(__dirname, '..', '..', 'icon.png'),
           license: 'CC-BY-ND-4.0',
-          homepage: 'https://thomasnordquist.github.io/MQTT-Explorer/',
-          bug_report_url: 'https://github.com/thomasnordquist/MQTT-Explorer/issues',
-          description: 'Author: Thomas Nordquist',
+          homepage: 'https://github.com/Stephen-Z/MQTT-Explorer.git',
+          bug_report_url: 'https://github.com/Stephen-Z/MQTT-Explorer.git',
+          description: 'Author: Stephen Zhang BailiTech, Thomas Nordquist',
         })
       },
     },

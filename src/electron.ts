@@ -11,6 +11,8 @@ import { waitForDevServer, isDev, runningUiTestOnCi, loadDevTools } from './deve
 import { shouldAutoUpdate, handleAutoUpdate } from './autoUpdater'
 import { registerCrashReporter } from './registerCrashReporter'
 
+require('@electron/remote/main').initialize()
+
 registerCrashReporter()
 
 if (!isDev() && !runningUiTestOnCi()) {
@@ -26,6 +28,7 @@ const connectionManager = new ConnectionManager()
 connectionManager.manageConnections()
 
 const configStorage = new ConfigStorage(path.join(app.getPath('appData'), app.name, 'settings.json'))
+console.log(path.join(app.getPath('appData'), app.name, 'settings.json'))
 configStorage.init()
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -46,6 +49,7 @@ async function createWindow() {
     show: false,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false,
       devTools: true,
       sandbox: false,
     },
@@ -62,11 +66,14 @@ async function createWindow() {
   console.log('icon path', iconPath)
 
   // Load the index.html of the app.
+  console.log("is dev =>", isDev())
   if (isDev()) {
     mainWindow.loadURL('http://localhost:8080')
   } else {
     mainWindow.loadFile('app/build/index.html')
   }
+  require("@electron/remote/main").enable(mainWindow.webContents)
+  // mainWindow.loadURL('http://localhost:8080')
 
   // Emitted when the window is closed.
   mainWindow.on('close', () => {

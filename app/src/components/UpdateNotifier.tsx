@@ -50,7 +50,8 @@ class UpdateNotifier extends React.PureComponent<Props, State> {
     super(props)
     this.state = { newerVersions: [] }
 
-    const ownVersion = electron.remote.app.getVersion()
+    const remote = require('@electron/remote')
+    const ownVersion = remote.app.getVersion()
     this.fetchReleases().then(releases => {
       const newerVersions = releases
         .filter(release => this.allowPrereleaseIfOwnVersionIsBeta(release, ownVersion))
