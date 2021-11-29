@@ -121,7 +121,9 @@
 	"optionalDependencies": {},
 	"config": {
 		"forge": {
-			"packagerConfig": {},
+			"packagerConfig": {
+				"icon": "res/icon.icns"
+			},
 			"makers": [
 				{
 					"name": "@electron-forge/maker-squirrel",
